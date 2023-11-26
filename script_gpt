@@ -1,0 +1,7 @@
+#!/bin/bash
+parted -s /dev/md0 mklabel gpt
+for i in 0 20 40 60 80;do parted /dev/md0 mkpart primary $i% $(( $i+20 ))% -s;done
+for i in $(seq 1 5); do sudo mkfs.ext4 /dev/md0p$i; done
+mkdir -p /raid/part{1,2,3,4,5}
+for i in $(seq 1 5); do mount /dev/md0p$i /raid/part$i; done
+echo -e "$(for i in {1..5};do echo "$(blkid|grep md0p$i |awk '{print $2 }') /raid/part_$i  ext4 defaults 0 0" ;done)\n" >> /etc/fstab
