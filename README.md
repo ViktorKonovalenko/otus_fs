@@ -80,7 +80,7 @@ tmpfs           100M     0  100M   0% /run/user/1000
 mdadm: set /dev/sdf faulty in /dev/md0
 </pre>
 Прверяем RAID 
-<pre>\
+<pre>
 [root@otuslinux vagrant]# cat /proc/mdstat 
 Personalities : [raid10] 
 md0 : active raid10 sdg[5] sdf[4](F) sde[3] sdd[2] sdc[1] sdb[0]
